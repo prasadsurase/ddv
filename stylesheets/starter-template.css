@@ -1,7 +1,20 @@
 body {
   padding-top: 50px;
+  background: '#E2E5EB';
 }
+
 .starter-template {
   padding: 40px 15px;
   text-align: center;
+}
+
+.headerbar{
+  background: '#9CACC3';
+}
+
+.pictures{
+  min-height: 100px;
+  border-style: solid;
+  border-width: 1px;
+  /*box-shadow: 2px 2px 2px 1px #888888;*/
 }
