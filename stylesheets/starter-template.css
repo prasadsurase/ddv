@@ -1,6 +1,7 @@
 body {
   padding-top: 50px;
-  background: '#E2E5EB';
+  /*background: '#E2E5EB';
+  background-color: #e2e5eb;*/
 }
 
 .starter-template {
@@ -9,12 +10,51 @@ body {
 }
 
 .headerbar{
-  background: '#9CACC3';
+  background-color: #9CACC3;
 }
 
 .pictures{
+  background-color: #e2e5eb;
   min-height: 100px;
   border-style: solid;
   border-width: 1px;
   /*box-shadow: 2px 2px 2px 1px #888888;*/
 }
+
+.data{
+  height: 120px;
+  max-height: 120px;
+  background-color: #e2e5eb;
+}
+.steps{
+  height: 300px;
+  background-color: #e2e5eb;
+}
+
+.measurements{
+  height: 20px;
+  background-color: #e2e5eb;
+}
+
+.step-details{
+  height: 40px;
+  padding: 5px;
+}
+
+.charts{
+  border-width: 1px;
+  height: 450px;
+  /*padding: 30px 10px 10px 10px;*/
+}
+
+.box-shadow {
+  box-shadow: 2px 2px 4px 2px grey;
+}
+
+.options{
+  height: 40px;
+}
+
+.options ul li a{
+  color: grey;
+} 
