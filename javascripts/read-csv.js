@@ -1,3 +1,4 @@
+/*
 function handleFiles(files) {
   // Check for the various File API support.
   if (window.FileReader) {
@@ -20,28 +21,26 @@ function getAsText(fileToRead) {
 
 function loadHandler(event) {
   var csv = event.target.result;
-  processData(csv);
+  scope.data.arr = processData(csv);
 }
 
 function processData(csv) {
   var allTextLines = csv.split(/\r\n|\n/);
   var lines = [];
-  console.log('====================================');
-  console.log(allTextLines);
-  for (var i=0; i<allTextLines.length; i++) {
+  for (var i = 0; i < allTextLines.length; i++) {
     var data = allTextLines[i].split(',');
-    var tarr = [];
-    for (var j=0; j<data.length; j++) {
-      tarr.push(data[j].trim());
+    var arr = [];
+    for (var j = 0; j < data.length; j++) {
+      arr.push(data[j].trim());
     }
-    lines.push(tarr);
+    lines.push(arr);
   }
-  console.log('==================================lines');
-  console.log(lines);
+  return lines;
 }
 
-function errorHandler(evt) {
-  if(evt.target.error.name == "NotReadableError") {
-    alert("Canno't read file !");
+function errorHandler(event) {
+  if(event.target.error.name == "NotReadableError") {
+    alert("Cannot read file !");
   }
 }
+*/

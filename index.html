@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ddvApp">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -10,6 +10,15 @@
     <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.ico">
 
     <title>Dynamic Data Visualization</title>
+    
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/jcanvas.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/application.js"></script>
+    <script src="javascripts/dataController.js"></script>
+    <script src="javascripts/read-csv.js"></script>
+    <script src="javascripts/lines.js"></script>
 
     <!-- Bootstrap core CSS -->
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
@@ -49,8 +58,14 @@
               <div class="headerbar text-center">
                 Data
                 <div class="data">
-                  <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
+                  <!--<input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">-->
+                  <input type="file" id="csvFileInput" onchange="angular.element(this).scope().handleFile(this.files)" accept=".csv">
                   <div class="row">
+                    <ul>
+                      <li ng-repeat="cell in data.arr">
+                        {{cell}}
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -81,8 +96,9 @@
               <div class="step-details text-center">
                 Step details goes here
               </div>
-              <div class="charts box-shadow" id="canvas">
-              </div>
+              <canvas class="charts box-shadow" id="canvas" width='640' height='450'>
+
+              </canvas>
             </div>
           </div>
           <div class="col-md-2">
@@ -94,7 +110,7 @@
                   <ul class="list-unstyled">
                     <li>
                       <span>
-                        <a href='#'>line</a>
+                        <a href='#'onclick="drawLine()">line</a>
                         <strong>x</strong>
                       </span>
                     </li>
@@ -213,9 +229,5 @@
     </div>
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="javascripts/jquery.min.js"></script>
-    <script src="javascripts/bootstrap.min.js"></script>
-    <script src="javascripts/read-csv.js"></script>
-
   </body>
 </html>
