@@ -59,3 +59,17 @@ body {
 .options ul li a{
   color: grey;
 } 
+
+#container{
+  position: relative;
+}
+
+#canvas{
+  border: 1px solid #000;
+}
+
+#dummy_canvas{
+  position: absolute;
+}
+
+
