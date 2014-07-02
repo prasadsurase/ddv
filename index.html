@@ -92,9 +92,9 @@
               <div class="step-details text-center">
                 Step details goes here
               </div>
-              <canvas class="charts box-shadow" id="canvas" width='640' height='450'>
-
-              </canvas>
+              <div id='container'>
+                <canvas class="charts box-shadow" id="canvas" width='640' height='450'></canvas>
+              </div>
             </div>
           </div>
           <div class="col-md-2">
@@ -103,10 +103,10 @@
                 Options
                 <div class="text-right">
                   <strong>DRAW</strong>
-                  <ul class="list-unstyled">
+                  <ul id="option_draw" class="list-unstyled">
                     <li>
                       <span>
-                        <a href='#'onclick="drawLine()">line</a>
+                        <a href='#' class='active'>line</a>
                         <strong>x</strong>
                       </span>
                     </li>

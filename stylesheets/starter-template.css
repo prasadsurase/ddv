@@ -68,7 +68,7 @@ body {
   border: 1px solid #000;
 }
 
-#dummy_canvas{
+#temp_canvas{
   position: absolute;
 }
 
