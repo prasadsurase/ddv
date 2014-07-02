@@ -70,6 +70,8 @@ body {
 
 #temp_canvas{
   position: absolute;
+  top: 1px; 
+  left: 1px;
 }
 
 

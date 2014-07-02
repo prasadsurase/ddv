@@ -9,14 +9,12 @@ if(window.addEventListener){
       this.started = false;
 
       this.mousedown = function(evnt){
-        console.log('mouse down');
         context.beginPath();
         context.moveTo(evnt._x, evnt._y);
         this.started = true;
       };
 
       this.mousemove = function(evnt){
-        console.log('mouse move');
         if(this.started){
           context.lineTo(evnt._x, evnt._y);
           context.stroke();
@@ -24,7 +22,6 @@ if(window.addEventListener){
       };
 
       this.mouseup = function(evnt){
-        console.log('mouse up');
         if(this.started){
           this.started = false;
         }
@@ -60,21 +57,22 @@ if(window.addEventListener){
         }
       };
     }//Rectangle
-    
+
     function Line(){
+      this.started = false;
+      var x1, y1;
+
       this.mousedown = function (evnt) {
-        console.log('line mouse down');
         this.started = true;
         x1 = evnt.layerX;
-        x2 = evnt.layerY;
+        y1 = evnt.layerY;
       };
 
       this.mousemove = function (evnt) {
         if (this.started) {
-          console.log('line mouse move');
           context.clearRect(0, 0, canvas.width, canvas.height);
           context.beginPath();
-          context.moveTo(evnt._x, evnt._y);
+          context.moveTo(x1, y1);
           context.lineTo(evnt.layerX, evnt.layerY);
           context.stroke();
           context.closePath();
@@ -82,7 +80,6 @@ if(window.addEventListener){
       };
 
       this.mouseup = function (evnt) {
-        console.log('line mouse up');
         if (this.started) {
           this.started = false;
           update_original_canvas();
@@ -113,15 +110,22 @@ if(window.addEventListener){
       var selected_shape = $('#option_draw li a.active');
       //selected_shape.addEventListener('change', ev_tool_change, false);
       shape = getShape(selected_shape);
-      console.log(shape);
 
       canvas.addEventListener('mousedown', evnt_canvas, false); 
       canvas.addEventListener('mousemove', evnt_canvas, false); 
       canvas.addEventListener('mouseup', evnt_canvas, false);
+  
+      var anchors = $('#option_draw li a');
+      for(var i = 0; i < anchors.length; i++){
+        anchors[i].addEventListener('click', function(event){
+          $('#option_draw li a').removeClass('active');
+          $(event.target).addClass('active');
+          shape = getShape($(event.target));
+        }, false);
+      }
     }
 
     function evnt_canvas(evnt){
-      console.log(evnt);
       evnt._x = evnt.layerX;
       evnt._y = evnt.layerY;
 
@@ -133,23 +137,19 @@ if(window.addEventListener){
     }
 
     function getShape(selected_shape){
-      var obj;
       switch(selected_shape.text()){
         case 'line': 
-          console.log('------------------------------1');
-          obj = new Line();
-          break;
+          return new Line();
+        break;
         case 'path': 
-          console.log('================================2');
-          obj = new Path();
-          break;
+          return new Path();
+        break;
         case 'rect': 
-          console.log('//////////////////////////////3');
-          obj = new Rectangle();
-          break;
+          return new Rectangle();
+        break;
       }
-      return obj;
     }
+
 
     init();
   }, false);
