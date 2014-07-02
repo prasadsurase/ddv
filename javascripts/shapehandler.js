@@ -5,7 +5,7 @@ if(window.addEventListener){
     var shape, default_shape;
 
     //Path constructor function with event handlers
-    function Path(){
+    function DrawPath(){
       this.started = false;
 
       this.mousedown = function(evnt){
@@ -28,9 +28,10 @@ if(window.addEventListener){
       };
     }//Path
 
-    function Rectangle(){
+    function DrawRectangle(){
       this.started = false;
-      var x1, y1, x2, y2;
+      var x1, y1;
+      var x, y, w, h;
 
       this.mousedown = function(evnt){
         this.started = true;
@@ -40,10 +41,10 @@ if(window.addEventListener){
 
       this.mousemove = function(evnt){
         if(this.started){
-          var x = Math.min(evnt._x,  x1);
-          var y = Math.min(evnt._y,  y1);
-          var w = Math.abs(evnt._x - x1);
-          var h = Math.abs(evnt._y - y1);
+          x = Math.min(evnt._x,  x1);
+          y = Math.min(evnt._y,  y1);
+          w = Math.abs(evnt._x - x1);
+          h = Math.abs(evnt._y - y1);
 
           context.clearRect(0, 0, canvas.width, canvas.height);
           context.strokeRect(x, y, w, h);
@@ -54,11 +55,12 @@ if(window.addEventListener){
         if(this.started){
           this.started = false;
           update_original_canvas();
+          canvasState.shapes.push(new Rectangle(x, y, w, h));
         }
       };
     }//Rectangle
 
-    function Line(){
+    function DrawLine(){
       this.started = false;
       var x1, y1;
 
@@ -114,7 +116,8 @@ if(window.addEventListener){
       canvas.addEventListener('mousedown', evnt_canvas, false); 
       canvas.addEventListener('mousemove', evnt_canvas, false); 
       canvas.addEventListener('mouseup', evnt_canvas, false);
-  
+      canvas.addEventListener('dblclick', function(evnt){ evnt.preventDefault();}, false);
+
       var anchors = $('#option_draw li a');
       for(var i = 0; i < anchors.length; i++){
         anchors[i].addEventListener('click', function(event){
@@ -139,13 +142,13 @@ if(window.addEventListener){
     function getShape(selected_shape){
       switch(selected_shape.text()){
         case 'line': 
-          return new Line();
+          return new DrawLine();
         break;
         case 'path': 
-          return new Path();
+          return new DrawPath();
         break;
         case 'rect': 
-          return new Rectangle();
+          return new DrawRectangle();
         break;
       }
     }
